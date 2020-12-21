@@ -24,7 +24,7 @@ Using the D3 techniques we taught you in class, create a scatter plot that repre
 •	Include state abbreviations in the circles. 
 •	Create and situate your axes and labels to the left and bottom of the chart.
 •	Note: You'll need to use python -m http.server to run the visualization. This will host the page at localhost:8000 in your web browser.
-
+![Bar Chart](https://github.com/parastoorazavi/plotly-challenge/blob/main/Images/hw01.png?raw=true)
 
 ## :doughnut:Bonus Part -	Impress the Boss. <a name = "bonus_part"></a>
 
