@@ -13,7 +13,7 @@ The editor wants to run a series of feature stories about the health risks facin
 The data set included with the assignment is based on 2014 ACS 1-year estimates: https://factfinder.census.gov/faces/nav/jsf/pages/searchresults.xhtml, but you are free to investigate a different data set. The current data set includes data on rates of income, obesity, poverty, etc. by state. MOE stands for "margin of error."
 
 
-## 🏁 Getting Started <a name = "getting_started"></a>
+## 💻 Getting Started <a name = "getting_started"></a>
 
 **D3 Dabbler:** <br>
 
@@ -26,7 +26,7 @@ Using the D3 techniques we taught you in class, create a scatter plot that repre
 •	Note: You'll need to use python -m http.server to run the visualization. This will host the page at localhost:8000 in your web browser.
 ![Bar Chart](https://github.com/parastoorazavi/D3-challenge/blob/main/Images/4-scatter.jpg)
 
-## :doughnut:Bonus Part -	Impress the Boss. <a name = "bonus_part"></a>
+## ⏱Bonus Part -	Impress the Boss. <a name = "bonus_part"></a>
 
 Why make a static graphic when D3 lets you interact with your data?
 
