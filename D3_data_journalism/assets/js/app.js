@@ -175,10 +175,11 @@ d3.csv("assets/data/data.csv").then(function(healthData, err) {
   .data(healthData)
   .enter()
   .append("circle")
+  .attr("id", "circlesGroup")
   .attr("cx", d => xLinearScale(d[chosenXAxis]))
   .attr("cy", d => yLinearScale(d[chosenYAxis]))
   .attr("r", 20)
-  .attr("fill", "pink")
+  .attr("fill", "blue")
   .attr("opacity", ".5");
 
 // Create group for 3 x-axis labels
@@ -214,6 +215,7 @@ var healthcareLabel = ylabelsGroup.append("text")
   .attr("y", 0 - margin.left)
   .attr("x", 0 - (height / 2))
   .attr("dy", "4em")
+  .attr("value", "healthcare") // value to grab for event listener
   .classed("active", true)
   .text("Lacks Healthcare (%)");
 
@@ -222,6 +224,7 @@ var healthcareLabel = ylabelsGroup.append("text")
   .attr("y", 0 - margin.left)
   .attr("x", 0 - (height / 2))
   .attr("dy", "1em")
+  .attr("value", "obesity") // value to grab for event listener
   .classed("inactive", true)
   .text("Obese (%)");
 
@@ -230,6 +233,7 @@ var healthcareLabel = ylabelsGroup.append("text")
   .attr("y", 0 - margin.left)
   .attr("x", 0 - (height / 2))
   .attr("dy", "2.5em")
+  .attr("value", "smokes") // value to grab for event listener
   .classed("inactive", true)
   .text("Smokes (%)");
   
