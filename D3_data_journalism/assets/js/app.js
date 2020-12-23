@@ -57,7 +57,8 @@ var chosenYAxis = "healthcare";
 function yScale(healthData, chosenYAxis) {
 // create scales
 var yLinearScale = d3.scaleLinear()
-  .domain([0, d3.max(healthData, d => d[chosenYAxis])
+  .domain([d3.min(healthData, d => d[chosenYAxis]) * 0.85,
+   d3.max(healthData, d => d[chosenYAxis]) * 1.1
   ])
   .range([height, 0]);
 
@@ -80,10 +81,24 @@ function renderyAxes(newYScale, yAxis) {
 // new circles
 function renderCircles(circlesGroup, newXScale, chosenXAxis, newYScale, chosenYAxis) {
 
-    circlesGroup.transition()
+    circlesGroup.selectAll("circle")
+      .transition()
       .duration(1000)
       .attr("cx", d => newXScale(d[chosenXAxis]))
       .attr("cy", d => newYScale(d[chosenYAxis]));
+  
+    return circlesGroup;
+  }
+
+  // function used for updating circles text group with a transition to
+// new circles
+function rendertextCircles(circlesGroup, newXScale, chosenXAxis, newYScale, chosenYAxis) {
+
+  circlesGroup.selectAll("text")
+      .transition()
+      .duration(1000)
+      .attr("x", d => newXScale(d[chosenXAxis]))
+      .attr("y", d => newYScale(d[chosenYAxis]));
   
     return circlesGroup;
   }
@@ -157,7 +172,7 @@ d3.csv("assets/data/data.csv").then(function(healthData, err) {
   
     // Create initial axis functions
     var bottomAxis = d3.axisBottom(xLinearScale);
-    var leftAxis = d3.axisLeft(yLinearScale);
+    var leftAxis = d3.axisLeft(yLinearScale).ticks(9);
   
     // append x axis
     var xAxis = chartGroup.append("g")
@@ -174,13 +189,29 @@ d3.csv("assets/data/data.csv").then(function(healthData, err) {
   var circlesGroup = chartGroup.selectAll("circle")
   .data(healthData)
   .enter()
+  .append("g");
+  
+  
+  
+  
+  circlesGroup
   .append("circle")
-  .attr("id", "circlesGroup")
   .attr("cx", d => xLinearScale(d[chosenXAxis]))
   .attr("cy", d => yLinearScale(d[chosenYAxis]))
-  .attr("r", 20)
-  .attr("fill", "blue")
-  .attr("opacity", ".5");
+  .attr("r", 13)
+  .attr("fill", "#9cc9dd")
+  .attr("stroke", "white");
+
+  circlesGroup
+  .append("text")
+  .attr("x", d => xLinearScale(d[chosenXAxis]))
+  .attr("y", d => yLinearScale(d[chosenYAxis]))
+  .text(d => d.abbr)
+  .attr("font-family", "sans-serif")
+  .attr("font-size", "10px")
+  .attr("font-weight", "bold")
+  .attr("text-anchor", "middle")
+  .attr("fill", "white");
 
 // Create group for 3 x-axis labels
 var xlabelsGroup = chartGroup.append("g")
@@ -261,6 +292,7 @@ var healthcareLabel = ylabelsGroup.append("text")
 
         // updates circles with new x values
         circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis);
+        circlesGroup = rendertextCircles(circlesGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis);
 
         // updates tooltips with new info
         circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
@@ -323,6 +355,7 @@ ylabelsGroup.selectAll("text")
 
     // updates circles with new y values
     circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis);
+    circlesGroup = rendertextCircles(circlesGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis);
 
     // updates tooltips with new info
     circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
