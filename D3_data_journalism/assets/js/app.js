@@ -311,7 +311,7 @@ var healthcareLabel = ylabelsGroup.append("text")
             .classed("inactive", true);
             ageLabel
             .classed("active", false)
-            .classed("inactive", false);
+            .classed("inactive", true);
             incomeLabel
             .classed("active", true)
             .classed("inactive", false);
@@ -374,7 +374,7 @@ ylabelsGroup.selectAll("text")
         .classed("inactive", true);
         obesityLabel
         .classed("active", false)
-        .classed("inactive", false);
+        .classed("inactive", true);
         smokesLabel
         .classed("active", true)
         .classed("inactive", false);
